@@ -1,0 +1,57 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: palindromechecker
+spec:
+  type: ClusterIP
+  selector:
+    app: palindromechecker
+  ports:
+    - name: app
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: palindromechecker
+spec:
+  selector:
+    matchLabels:
+      app: palindromechecker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: palindromechecker
+    spec:
+      containers:
+        - name: app
+          image: 2024sl93093/springbootimage
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: istio
+  name: palindromechecker
+spec:
+  rules:
+    - host: palindromechecker.c-03b621c.kyma.ondemand.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: palindromechecker
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - palindromechecker.c-03b621c.kyma.ondemand.com
+      secretName: kyma-gateway-certs
