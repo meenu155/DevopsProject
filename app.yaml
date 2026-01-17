@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: 2024sl93093/springbootimage
+          image: meenu155/springbootimage
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -41,7 +41,7 @@ metadata:
   name: palindromechecker
 spec:
   rules:
-    - host: palindromechecker.c-03b621c.kyma.ondemand.com
+    - host: palindromechecker.c-90fe5df.kyma.ondemand.com
       http:
         paths:
           - backend:
@@ -53,5 +53,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - palindromechecker.c-03b621c.kyma.ondemand.com
+        - palindromechecker.c-90fe5df.kyma.ondemand.com
       secretName: kyma-gateway-certs

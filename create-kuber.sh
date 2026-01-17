@@ -4,7 +4,7 @@ if [ "$#" -ne 1 ]
 then
   echo "Incorrect Usage: Domain was not provided."
   echo "Example Usage:"
-  echo "./create-kubeconfig.sh c-1234567 >> pipeline-kubeconfig.yaml"
+  echo "./create-kubeconfig.sh c-90fe5df >> pipeline-kubeconfig.yaml"
   exit 1
 fi
 
